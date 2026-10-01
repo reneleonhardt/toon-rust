@@ -71,18 +71,18 @@ mod tests {
 
     #[test]
     fn test_normalize_nan() {
-        let value = Value::from(json!(f64::NAN));
+        let value = Value::from(json!(core::primitive::f64::NAN));
         let normalized = normalize(value);
         assert_eq!(normalized, Value::from(json!(null)));
     }
 
     #[test]
     fn test_normalize_infinity() {
-        let value = Value::from(json!(f64::INFINITY));
+        let value = Value::from(json!(core::primitive::f64::INFINITY));
         let normalized = normalize(value);
         assert_eq!(normalized, Value::from(json!(null)));
 
-        let value = Value::from(json!(f64::NEG_INFINITY));
+        let value = Value::from(json!(core::primitive::f64::NEG_INFINITY));
         let normalized = normalize(value);
         assert_eq!(normalized, Value::from(json!(null)));
     }
@@ -97,11 +97,11 @@ mod tests {
     #[test]
     fn test_normalize_nested() {
         let value = Value::from(json!({
-            "a": f64::NAN,
+            "a": core::primitive::f64::NAN,
             "b": {
-                "c": f64::INFINITY
+                "c": core::primitive::f64::INFINITY
             },
-            "d": [1, f64::NAN, 3]
+            "d": [1, core::primitive::f64::NAN, 3]
         }));
 
         let normalized = normalize(value);
