@@ -3,18 +3,20 @@ name: CI
 on:
   push:
     branches: [ main ]
+    # Keep workflow files in CI by leaving .github/** out of this ignore list.
     paths-ignore:
       - '**/*.md'
       - 'docs/**'
   pull_request:
     branches: [ main ]
+    # Keep workflow files in CI by leaving .github/** out of this ignore list.
     paths-ignore:
       - '**/*.md'
       - 'docs/**'
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   fmt:
